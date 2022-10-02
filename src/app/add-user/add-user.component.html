@@ -1,0 +1,47 @@
+<div class="container custom-container">
+  <h2>Add User</h2>
+  <div *ngIf="showMessage">
+    <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.message }}</ngb-alert>
+  </div>
+  <form *ngIf="addUserForm" [formGroup]="addUserForm" class="addUserForm">
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">PPC</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control-plaintext" formControlName="ppc" class="form-control" placeholder="PPC">
+      </div>
+      <p *ngIf="!addUserForm.controls.ppc.pristine && addUserForm.controls.ppc.errors?.required" class="errorColor customError">PPC is required!</p>
+      <p *ngIf="!addUserForm.controls.ppc.pristine && addUserForm.controls.ppc.errors?.pattern" class="errorColor customError">Enter valid PPC</p>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" formControlName="name" placeholder="Name">
+      </div>
+      <p *ngIf="!addUserForm.controls.name.pristine && addUserForm.controls.name.errors?.required" class="errorColor customError">Name is required!</p>
+      <p *ngIf="!addUserForm.controls.name.pristine && addUserForm.controls.name.errors?.pattern" class="errorColor customError">Enter valid name!</p>
+    </div>
+    <div class="form-group row customWidth">
+      <label class="col-sm-2 col-form-label customLabel">Role</label>
+      <div class="col-sm-7 select marginLeft15">
+        <select formControlName="role" class="customeDropdown">
+          <option value="" selected disabled hidden>Select Role</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+        </select>
+      </div>
+      <p *ngIf="!addUserForm.controls.role.pristine && addUserForm.controls.role.errors?.required" class="errorColor customError">Role is required!</p>
+    </div>
+    <div class="form-group row" *ngIf="fbuLists">
+      <label class="col-sm-2 col-form-label" for="fbu">Functional Business Unit(s)</label>
+      <div class="col-sm-7" id="dropdownMulti">
+        <ng-multiselect-dropdown [placeholder]="'User functional business units'" [settings]="fbuMultiSettings" 
+        [data]="fbuLists" formControlName="fbu">
+        </ng-multiselect-dropdown>
+      </div>
+    </div>
+    <div class="addUserBtn">
+      <back-cmp></back-cmp>
+      <button type="button" class="btn-normal btn-custom btn-search-custom" (click)="addUser()" [disabled]="addUserForm.invalid">Submit</button>
+    </div>
+  </form>
+</div>

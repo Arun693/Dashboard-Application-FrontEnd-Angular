@@ -1,0 +1,43 @@
+.custom-container {
+    margin-top: 50px;
+    border: 1px solid #c1c1c1;
+    padding: 20px;
+}
+.labelCorrect {
+    padding-left: 0px;
+}
+.w3-blue, .w3-hover-blue:hover {
+    color: #fff!important;
+    background-color: #777b7e !important;;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+.w3-card-4, .w3-hover-shadow:hover {
+    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+}
+.w3-panel {
+    margin-top: 16px;
+    margin-bottom: 0px;
+    border-radius: 10px 10px 0px 0px;
+}
+.crossIcon {
+    margin-right: 6px;
+    font-size: smaller;
+    margin-top: 2px;
+    cursor: pointer;
+}
+.panelBody {
+    border: 2px solid gray;
+    padding: 15px;
+}
+.addBtnClass {
+    margin: 15px 0px 15px 0px;
+}
+.submitBtnClass {
+    float: right;
+    margin-right: 5px;
+}
+.marginLeft15 {
+    margin-left: 15px;
+}

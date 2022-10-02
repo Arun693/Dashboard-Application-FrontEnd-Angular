@@ -1,0 +1,29 @@
+.card {
+    border-radius: 10px;
+}
+.database-icon {
+    font-size: 40px;
+    color: cadetblue;
+}
+.card-header-name{
+    font-family: 'Muli', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+}
+.border-botm {
+    border-bottom: 1px solid #c4bfbf;
+}
+.card-actions {
+    margin-top: 10px;
+}
+.card-actions >  .col-lg-6 {
+    cursor: pointer;
+    font-weight: 450;
+    text-align: center;
+    color: #274444;
+}
+*:focus {
+    outline: 0;
+    outline: none;
+
+}

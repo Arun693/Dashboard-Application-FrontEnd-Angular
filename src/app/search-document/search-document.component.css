@@ -1,0 +1,91 @@
+.custom-container {
+    margin-top: 50px;
+    border: 1px solid #c1c1c1;
+    padding: 20px;
+  }
+  .marginLeft15 {
+    margin-left: 15px;
+    width: 27em;
+    margin-left: 10px;
+}
+.top-margin {
+    margin-top: 20px;
+    margin-bottom: 35px;
+}
+.btn-search-custom {
+    margin-right: 10%;
+    float: right;
+}
+.downloadClass {
+    width: 30px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.rowWidth {
+    width: 20%;
+}
+
+:host /deep/ ng-multiselect-dropdown .multiselect-dropdown {
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 0 !important;
+    background: #2c3e50;
+    background-image: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0 0 0 .5em;
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    height: 48px;
+  }
+  :host /deep/ ng-multiselect-dropdown .dropdown-btn{
+    border: none !important;
+    padding-top: 10px !important;
+    font-size: 16px !important;
+  }
+  .errpadding {
+    margin-left: 30px;
+  }
+  .dateRow {
+    width: 107px;
+  }
+  .txt-overflow {
+    display: block;
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .advanceSearch {
+    color: #212529;
+    cursor: pointer;
+    margin-left: 15px;
+    float: left;
+    font-weight: bold;
+  }
+  .advSearch {
+    -webkit-transition: width 1s, height 2s; /* For Safari 3.1 to 6.0 */
+    transition: width 1s, height 2s;
+    height: 180px;
+}
+.advSearchNostyle {
+    -webkit-transition: width 1s, height 2s; /* For Safari 3.1 to 6.0 */
+    transition: width 1s, height 2s;
+    height: 0px;
+}
+.imgWidth {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+}
+.btn-container {
+  margin: 15px 0px 0px 15px;
+}
+.txt-pointer {
+  cursor: pointer;
+}

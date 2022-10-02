@@ -1,0 +1,10 @@
+<div>
+  <input type="file" #selectedFile ng2FileSelect [uploader]="uploader" name="file"/>
+  <div *ngIf="errorMessage" class="errorColor">{{errorMessage}}</div>
+  <div class="float-right">
+      <div *ngFor="let item of uploader.queue">
+          <button type="button" class="btn-normal btn-custom"
+                                  (click)="item.upload()" [disabled]="formInvalid">Upload</button>
+      </div>
+    </div>
+</div>

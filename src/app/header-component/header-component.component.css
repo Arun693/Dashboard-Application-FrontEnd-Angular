@@ -1,0 +1,50 @@
+.rocketClass {
+    width: 25px;
+    padding-bottom: 7px;
+}
+.custom-button-dropdown {
+    color: #ffffff;
+    background-color: transparent;
+    background-image: none;
+    text-transform: capitalize;
+}
+.custom-container {
+    width: 100% !important;
+}
+.headerMain {
+    width: 20%;
+    float: left;
+}
+.dropdown-container {
+    float: left;
+    width: 50%;
+}
+.float-right {
+    float: right;
+}
+.logoutBtn {
+    float: right;
+    width: 200px;
+}
+.version {
+    color: white;
+    font-size: x-small;
+}
+.navbar-brand{
+    margin-right: 0px !important;
+}
+@media only screen and  (max-width:500px) {
+    .headerMain {
+        width: 45%;
+    }
+    .headerMain > a {
+        font-size: 11px;
+        margin-top: 8px;
+    }
+    .headerMain > img {
+        width: 20px;
+    }
+    .logoutBtn {
+        width: 45%;
+    }
+}

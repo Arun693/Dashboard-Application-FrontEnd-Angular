@@ -1,0 +1,25 @@
+<div class="container custom-container">
+    <h2>Edit User</h2>
+    <div *ngIf="showMessage">
+        <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.message }}</ngb-alert>
+    </div>
+    <form *ngIf="editUser" [formGroup]="editUser" class="editUserForm">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">User</label>
+            <div class="col-sm-6 select marginLeft15 custome-select">
+                <select formControlName="user" class="customeDropdown" (change)="onChange($event)">
+                    <option value="" selected disabled hidden>Select Application User</option>
+                    <option *ngFor="let user of userList" [value]="user.ppc" class="toCapital">{{user.name}} ({{user.ppc}})</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row editbtnGrp">
+            <back-cmp></back-cmp>
+            <span *ngIf="editUser.value.user">
+                <button type="button" class="btn btn_delete" (click)="delete()">Delete</button>
+                <button type="button" class="btn-normal editBtn" (click)="edit()">Edit</button>
+                <button type="button" class="btn-normal editBtn" (click)="reset()">Reset password</button>
+            </span>
+        </div>
+    </form>
+</div>

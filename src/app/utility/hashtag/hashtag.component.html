@@ -1,0 +1,22 @@
+<div class="hashContainer">
+  <div class="tags">
+    <ul class="tag-list">
+      <li class="tag-item" *ngFor="let hash of userHashArray; let i = index">
+        <span>#{{hash}}</span>
+        <span class="deleteHash" (click)="deleteHash(i)"> x</span></li>
+    </ul>
+    <input type="text" class="userInput" autocomplete="off" (keypress)="eventHandler($event)" placeholder="{{placeHolder}}"
+    [(ngModel)]="hashtag" (ngModelChange)="getHashValues(hashtag)" pattern="^[A-Za-z0-9*_ #.-]{0,40}$"
+     #name="ngModel" (blur)="onBlur()"> 
+     <!-- (blur)="onBlur() pattern="^[a-zA-Z0-9_ .-.#]{0,40}$" Add new hashtag (Max 10 tags)" -->
+    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Hashtag may contain text, number, - or _ only and can have maximum 40 length</div>
+  </div>
+  <div id="myDropdown" class="dropdown-content" [ngClass]="{'show': showDropdown == true}">
+      <a (click)="selectHash(shash.hashTag)" *ngFor="let shash of storedHash; let i = index" class="suggestionHash">#{{shash.hashTag}}</a>
+  </div>
+</div>
+<div class="infoIcon">
+    <a>
+        <img src="assets/images/info.png" (click)="showInfo()">
+      </a>
+</div>

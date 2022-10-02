@@ -1,0 +1,17 @@
+:host ::ng-deep ngb-timepicker  .ngb-tp{
+    height: 32px;
+  }
+
+:host ::ng-deep ngb-timepicker input{
+    width: 53px !important;
+  }
+  .date-time-div {
+    float: left;
+}
+.calenderTab {
+    width: 160px;
+    float: left;
+}
+.customWidth {
+    width: 95%;
+}

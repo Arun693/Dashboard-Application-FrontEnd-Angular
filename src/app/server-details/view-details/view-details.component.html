@@ -1,0 +1,109 @@
+<div class="container custom-container">
+  <h2>View Server Details</h2>
+  <form class="form-horizontal serverForm" *ngIf="viewServer" [formGroup]="viewServer">
+      <label class="basic-container">
+          <input type="radio" checked="checked" name="requestType" formControlName="requestType" [value]="true">
+          <span class="checkmark"></span>
+       </label>
+    <div class="radioSelect form-parentDiv">
+      <div class="form-group floatLeft50">
+        <label class="control-label col-sm-6" for="applicationName">Channel Name:</label>
+        <div class="col-sm-10 select" id="dropdownMulti">
+          <select formControlName="channelType" class="customeDropdown">
+            <option value="" selected disabled hidden>Select Channel Name</option>
+            <option *ngFor="let obj of channelTypes" [value]="obj.id">{{obj.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group flatRight50">
+        <label class="control-label col-sm-6" for="documentType">Application Name:</label>
+        <div class="col-sm-10 select marginLeft15">
+          <select formControlName="applicationID" class="customeDropdown">
+            <option value="" selected disabled hidden>Select Application Name</option>
+            <option *ngFor="let obj of applicationTypes" [value]="obj._id">{{obj.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="clearFloat"></div>
+    </div>
+    <div class="orClass">OR</div>
+    <label class="basic-container">
+        <input type="radio" name="requestType" formControlName="requestType" [value]="false">
+        <span class="checkmark"></span>
+      </label>
+    <div>
+        <div class="form-group form-parentDiv">
+            <label class="control-label col-sm-6">Search with server IP:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" formControlName="serverIP" id="serverIP" placeholder="Enter name of the document" name="documentname">
+            </div>
+          </div>
+    </div>
+    <div class="searchBtn">
+      <back-cmp></back-cmp>
+      <button type="button" class="btn-normal btn-custom btn-search-custom" (click)="searchServer()" [disabled]="viewServer.invalid">Search</button>
+    </div>
+  </form>
+</div>
+
+<div class="container custom-container" *ngIf="searchComplete">
+  <div>
+    <div class="col-md-5" *ngIf="!serverData" type="info">
+      <strong>No data available.</strong>
+    </div>
+    <div *ngIf="serverData && serverData.serverArray && serverData.serverArray.length">
+      <div>
+        <div class="applicationName">Application Name:</div>
+        <div class="applicationNameOut">{{serverData.application?.name}}</div>
+        <div class="clearFloat"></div>
+        <div class="form-group row">
+          <div class="col-sm-2">Public IP(DC):</div>
+          <div class="col-sm-2">
+            <strong>{{serverData.publicDCIP}}</strong>
+          </div>
+          <div class="col-sm-2">Public IP(DR):</div>
+          <div class="col-sm-2">
+            <strong>{{serverData.publicDRIP}}</strong>
+          </div>
+          <div class="col-sm-2">Public IP(UAT):</div>
+          <div class="col-sm-2">
+            <strong>{{serverData.publicUATIP}}</strong>
+          </div>
+          <div class="clearFloat"></div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-2">Public Domain(LIVE):</div>
+          <div class="col-sm-4">
+            <strong>{{serverData.publicDomainLive}}</strong>
+          </div>
+          <div class="col-sm-2">Public Domain(UAT):</div>
+          <div class="col-sm-4">
+            <strong>{{serverData.publicDomainUAT}}</strong>
+          </div>
+          <div class="clearFloat"></div>
+        </div>
+      </div>
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th class="font-table-head">Server Name</th>
+            <th class="font-table-head">Live IP</th>
+            <th class="font-table-head">DR IP</th>
+            <th class="font-table-head">UAT IP</th>
+            <th class="font-table-head">External Dependency IPs</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of serverData.serverArray;let i = index">
+            <td class="font-Table nameWidth">{{item.serverName}}</td>
+            <td class="font-Table live-css">{{item.liveIP}}</td>
+            <td class="font-Table dr-css">{{item.drIP}}</td>
+            <td class="font-Table uat-css">{{item.uatIP}}</td>
+            <td class="font-Table ext-css nameWidth">{{item.externalDependencyIp}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

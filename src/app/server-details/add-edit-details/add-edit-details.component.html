@@ -1,0 +1,136 @@
+<div class="container custom-container">
+  <h2>Add Server Details</h2>
+  <div *ngIf="alert && alert.type">
+    <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.message }}</ngb-alert>
+  </div>
+  <form class="form-horizontal" *ngIf="addEditServer" [formGroup]="addEditServer">
+    <div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Channel Name:</label>
+        <div class="col-sm-7 select marginLeft15">
+          <select formControlName="channelType" class="customeDropdown">
+            <option value="" selected disabled hidden>Select Channel Name</option>
+            <option *ngFor="let obj of channelTypes" [value]="obj.id">{{obj.name}}</option>
+          </select>
+        </div>
+        <p *ngIf="!addEditServer.controls.channelType.pristine && addEditServer.controls.channelType.errors?.required" class="errorColor errpadding">Channel Name is required!</p>
+      </div>
+      <div class="form-group row" *ngIf="applicationTypes">
+        <label class="col-sm-3 col-form-label">Application Name:</label>
+        <div class="col-sm-7 select marginLeft15">
+          <select formControlName="applicationID" class="customeDropdown">
+            <option value="" selected disabled hidden>Select Application Name</option>
+            <option *ngFor="let obj of applicationTypes" [value]="obj._id">{{obj.name}}</option>
+          </select>
+        </div>
+        <p *ngIf="!addEditServer.controls.applicationID.pristine && addEditServer.controls.applicationID.errors?.required" class="errorColor errpadding">Application name is required!</p>
+      </div>
+      <div class="clearFloat"></div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Public IP Address - DC</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" formControlName="publicDCIP" placeholder="Public DC IP Address if any">
+      </div>
+      <p *ngIf="!addEditServer.controls.publicDCIP.pristine && addEditServer.controls.publicDCIP?.errors?.pattern"
+              class="errorColor customError">Enter valid IP Address!</p>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Public IP Address - DR</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" formControlName="publicDRIP" placeholder="Public DR IP Address if any">
+      </div>
+      <p *ngIf="!addEditServer.controls.publicDRIP.pristine && addEditServer.controls.publicDRIP?.errors?.pattern"
+      class="errorColor customError">Enter valid IP Address!</p>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Public IP Address - UAT</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" formControlName="publicUATIP" placeholder="Public UAT IP Address if any">
+        </div>
+        <p *ngIf="!addEditServer.controls.publicUATIP.pristine && addEditServer.controls.publicUATIP?.errors?.pattern"
+        class="errorColor customError">Enter valid IP Address!</p>
+      </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Public Domain(Live)</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" formControlName="publicDomainLive" placeholder="Public domain(Live) if any">
+      </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Public Domain(UAT)</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" formControlName="publicDomainUat" placeholder="Public domain(UAT) if any">
+        </div>
+      </div>
+
+    <div formArrayName="serverArray">
+      <div *ngFor="let address of addEditServer.controls.serverArray.controls; let i=index" class="panel panel-default">
+        <div class="w3-panel w3-blue w3-card-4">
+          <span>Server Details {{i + 1}}</span>
+          <span class="crossIcon float-right" *ngIf="addEditServer.controls.serverArray.controls.length > 0" (click)="removeServer(i)">x</span>
+        </div>
+        <div class="panelBody" [formGroupName]="i">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Server Name</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" formControlName="serverName" placeholder="Server Name">
+            </div>
+            <p *ngIf="!addEditServer.controls.serverArray.controls[i].controls.serverName?.pristine && addEditServer.controls.serverArray.controls[i].controls.serverName?.errors?.required"
+              class="errorColor customError">Name is required!</p>
+            <p *ngIf="!addEditServer.controls.serverArray.controls[i].controls.serverName?.pristine && addEditServer.controls.serverArray.controls[i].controls.serverName?.errors?.pattern"
+              class="errorColor customError">Enter valid name!</p>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Live IP Address</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" formControlName="liveIP" placeholder="Live IP Address">
+            </div>
+            <p *ngIf="!addEditServer.controls.serverArray.controls[i].controls.liveIP?.pristine && addEditServer.controls.serverArray.controls[i].controls.liveIP?.errors?.required"
+              class="errorColor customError">IP Address is required!</p>
+            <p *ngIf="!addEditServer.controls.serverArray.controls[i].controls.liveIP?.pristine && addEditServer.controls.serverArray.controls[i].controls.liveIP?.errors?.pattern"
+              class="errorColor customError">Enter valid IP Address!</p>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">DR IP Address</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" formControlName="drIP" placeholder="DR IP Address">
+            </div>
+            <p *ngIf="!addEditServer.controls.serverArray.controls[i].controls.drIP?.pristine && addEditServer.controls.serverArray.controls[i].controls.drIP?.errors?.pattern"
+              class="errorColor customError">Enter valid IP Address!</p>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">UAT IP Address</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" formControlName="uatIP" placeholder="UAT IP Address">
+            </div>
+            <p *ngIf="!addEditServer.controls.serverArray.controls[i].controls.uatIP?.pristine && addEditServer.controls.serverArray.controls[i].controls.uatIP?.errors?.pattern"
+              class="errorColor customError">Enter valid IP Address!</p>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">External Dependency IP</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" formControlName="externalDependencyIp" placeholder="External Dependency IP Address if any">
+            </div>
+            <p *ngIf="!addEditServer.controls.serverArray.controls[i].controls.externalDependencyIp?.pristine && addEditServer.controls.serverArray.controls[i].controls.externalDependencyIp?.errors?.pattern"
+              class="errorColor customError">Enter valid IP Address!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="addBtnClass">
+      <button type="button" (click)="addServer()" class="btn btn-outline-info">Add another server (+)</button>
+    </div>
+
+    <div class="submitBtnClass">
+      <back-cmp></back-cmp>
+      <button type="button" class="btn-normal btn-custom btn-search-custom" (click)="addServerInfo()" [disabled]="addEditServer.invalid || addEditServer.pristine">Save</button>
+    </div>
+    <div class="clearfix"></div>
+  </form>
+</div>

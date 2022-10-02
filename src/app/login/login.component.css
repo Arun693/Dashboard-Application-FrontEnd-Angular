@@ -1,0 +1,23 @@
+.loginText {
+    font-size: x-large;
+    font-weight: 400;
+}
+.version {
+    font-size: small;
+    position: absolute;
+    right: 0;
+    top: 83px;
+}
+.loginSIBL {
+    position: absolute;
+    height: 56px;
+    padding-top: 17px;
+    background: #2196F3;
+    padding-right: 11px;
+    padding-left: 10px;
+    color: white;
+    border-radius: 5px;
+   }
+   .loginUsername {
+    padding-left: 90px !important;
+   }

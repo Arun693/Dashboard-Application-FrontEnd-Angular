@@ -1,0 +1,22 @@
+<!-- <div class="date-time-div">
+  <div class="input-group mr-2 calenderTab">
+    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="model">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+        <img src="assets/images/calender.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+      </button>
+    </div>
+  </div>
+  <ngb-timepicker name="dp" [seconds]="true" [(ngModel)]="model"></ngb-timepicker>
+</div> -->
+
+<label class="customWidth">
+  <input [owlDateTimeTrigger]="dt" 
+  [owlDateTime]="dt" class="customWidth" 
+  [min]="_minRange"
+  [max]="_maxRange"
+  [(ngModel)]="dateTime"
+  (ngModelChange)="onDateChange($event)"
+  >
+  <owl-date-time #dt></owl-date-time>
+</label>

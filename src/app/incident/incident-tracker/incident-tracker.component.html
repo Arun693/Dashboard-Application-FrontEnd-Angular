@@ -1,0 +1,114 @@
+<div class="container custom-container">
+  <h2>Track Incidents</h2>
+  <form class="createIncidentForm" *ngIf="incidentTrackForm" [formGroup]="incidentTrackForm">
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label txt-center-font">Functional Business Unit:</label>
+      <div class="col-sm-4 select">
+        <select class="customeDropdown" formControlName="fbu">
+          <option value="" selected disabled hidden>Select FBU</option>
+          <option *ngFor="let obj of functionalBusinessUnits" [value]="obj.id">{{obj.name}}</option>
+        </select>
+      </div>
+      <label for="staticEmail" class="col-sm-2 col-form-label text-center">Application Name:</label>
+      <div class="col-sm-4 select">
+        <select class="customeDropdown" formControlName="applicationID">
+          <option value="" selected disabled hidden>Select Application</option>
+          <option *ngFor="let obj of applicationNames" [value]="obj.id">{{obj.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label txt-center-font">Downtime Type: (Optional)</label>
+      <div class="col-sm-4 select">
+        <select class="customeDropdown" formControlName="requestType">
+          <option value="" selected disabled hidden>Select downtime type</option>
+          <option *ngFor="let obj of incidentTypes" [value]="obj.id">{{obj.name}}</option>
+        </select>
+      </div>
+      <label for="staticEmail" class="col-sm-2 col-form-label text-center txt-center-font">Incident content string: (Optional)</label>
+      <div class="col-sm-4 txtInputDiv">
+        <input type="text" class="form-control" formControlName="content" id="searchString" placeholder="Search any keywords" name="searchString">
+      </div>
+    </div>
+    <back-cmp></back-cmp>
+    <div class="btn-container">
+      <button type="button" class="btn-normal btn-custom btn-search-custom" (click)="search()" [disabled]="!incidentTrackForm.value.fbu">Search</button>
+      <button type="button" class="btn-normal btn-custom  btn-search-custom" [disabled]="incidentTrackForm.pristine" (click)="reset()">Reset</button>
+    </div>
+    <div class="clearFloat"></div>
+  </form>
+
+  <div *ngIf="searchComplete" class="resultContainer">
+    <div class="col-md-5 noData" *ngIf="data && data.data && !data.data.length" type="info">
+      <strong>No data available.</strong>
+    </div>
+    <div *ngIf="data && data.data && data.data.length" (click)="exportToExcel()" class="excelContainer">
+      <div class="excelTxt">Download as Excel</div>
+      <img src="assets/images/excel-download.png" class="excelClass">
+    </div>
+    <table class="table table-bordered" *ngIf="data && data.data && data.data.length">
+      <thead>
+        <tr>
+          <th scope="col">Sl No</th>
+          <th scope="col">Incident Type</th>
+          <th scope="col">Application</th>
+          <th scope="col">Occurrence</th>
+          <th scope="col">Incident/Feature Details</th>
+          <th scope="col">RCA/Servers affected</th>
+          <th scope="col">CRF/DRF Number</th>
+          <th scope="col">Date</th>
+          <th scope="col">Total Duration</th>
+          <th scope="col">Staff Involved</th>
+          <th *ngIf="isAdmin()"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data.data;let i = index">
+          <td>{{i + data.offset + 1 }}</td>
+          <td>{{item.requestType}}</td>
+          <td>{{item.application}}</td>
+          <td>{{item.occurrence}}</td>
+          <td>{{item.issue}}</td>
+          <td>{{item.rca}}</td>
+          <td>{{item.crfNumber}}</td>
+          <td>
+            <div *ngFor="let duration of item.durationArray" class="borderClass">{{duration.fromTime}} to {{duration.toTime}}
+              <br>
+            </div>
+          </td>
+          <td class="durationFont">{{item.totalDuration}}</td>
+          <td>
+            <div *ngFor="let employee of item.staffList;let j = index">{{employee.name}}
+              <span *ngIf="item.staffList.length != j+1">,</span>
+              <br>
+            </div>
+          </td>
+          <td *ngIf="isAdmin()">
+            <div>
+              <button (click)="deleteIncident(item._id)" class="btn btn-sm btn-info">
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="data && data.pages > 1">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" *ngIf="data.current != 1">
+            <a class="page-link" tabindex="-1" (click)="previous()">Previous</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link">{{data.current}} of {{data.pages}}</a>
+          </li>
+          <li class="page-item" *ngIf="data.current != data.pages">
+            <a class="page-link" tabindex="1" (click)="next()">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

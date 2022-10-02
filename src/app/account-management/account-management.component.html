@@ -1,0 +1,37 @@
+<div class="container custom-container">
+    <h2>Change Password</h2>
+<form *ngIf="manageAcctForm" [formGroup]="manageAcctForm" class="manageAccountForm">
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">PPC</label>
+      <div class="col-sm-10">
+        <input type="text" readonly class="form-control-plaintext" formControlName="ppc" id="staticEmail" value="email@example.com">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Current Password</label>
+      <div class="col-sm-8">
+        <input type="password" class="form-control"  formControlName="currentPassword" placeholder="Current Password">
+      </div>
+      <p *ngIf="!manageAcctForm.controls.currentPassword.pristine && manageAcctForm.controls.currentPassword.errors?.required" class="errorColor customError">Current password is required!</p>
+    </div>
+    <div class="form-group row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">New Password</label>
+        <div class="col-sm-8">
+          <input type="password" class="form-control"  formControlName="newPasswordOne" placeholder="New Password">
+        </div>
+        <p *ngIf="!manageAcctForm.controls.newPasswordOne.pristine && manageAcctForm.controls.newPasswordOne.errors?.required" class="errorColor customError">Password is required!</p>
+        <p *ngIf="!manageAcctForm.controls.newPasswordOne.pristine && manageAcctForm.controls.newPasswordOne.errors?.pattern" class="errorColor customError">Password should contain at least 8 characters, at least 1 numeric character, at least 1 lowercase letter, at least 1 uppercase letter,at least 1 special character!</p>
+    </div>
+    <div class="form-group row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Confirm Password</label>
+        <div class="col-sm-8">
+          <input type="password" class="form-control" placeholder="Confirm Password" formControlName="newPasswordTwo">
+        </div>
+        <p *ngIf="!manageAcctForm.controls.newPasswordTwo.pristine && manageAcctForm.controls.newPasswordTwo.errors?.required" class="errorColor customError">Confirm new password!</p>
+        <p *ngIf="!manageAcctForm.controls.newPasswordTwo.pristine && manageAcctForm.controls.newPasswordTwo.errors?.pattern" class="errorColor customError">Password should contain at least 8 characters, at least 1 numeric character, at least 1 lowercase letter, at least 1 uppercase letter,at least 1 special character!</p>
+      </div>
+    <div class="manageAccountBtn">
+        <button type="button" class="btn-normal btn-custom btn-search-custom" (click)="changePassword()" [disabled]="manageAcctForm.invalid">Submit</button>
+    </div>
+  </form>
+</div>

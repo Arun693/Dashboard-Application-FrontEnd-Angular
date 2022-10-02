@@ -1,0 +1,20 @@
+<h2 class="page-header">
+  <strong>Dashboard Application</strong>
+  <span class="version">v{{version}}</span>
+</h2>
+<div class="login_backbround"></div>
+
+<div class="wrapper">
+  <form class="login" *ngIf="loginForm" [formGroup]="loginForm">
+    <p class="title">Log in</p>
+    <div class="loginSIBL">Domain</div> 
+    <input type="text" id="ppc" formControlName="ppc" class="loginUsername" placeholder="Username" autofocus autocomplete="off"/>
+    <!-- <i class="fa fa-user"></i> -->
+    <input type="password" placeholder="Password" class="loginPassword" id="password" formControlName="password" autocomplete="off"/>
+    <!-- <i class="fa fa-key"></i> -->
+     <span *ngIf="errorMesage" class="errorColor">{{errorMesage}}</span>
+    <button type="button" [disabled]="loginForm.invalid" (click)="login()" type="submit">
+      <span class="state loginText">Log in</span>
+    </button>
+  </form>
+</div>

@@ -1,0 +1,15 @@
+.custom-container {
+    margin-top: 50px;
+    border: 1px solid #c1c1c1;
+    padding: 20px;
+}
+.manageAccountForm {
+    margin-bottom: 55px;
+}
+.manageAccountBtn {
+    float: right;
+    width:28%
+}
+.customError {
+    margin-left: 18%;
+}

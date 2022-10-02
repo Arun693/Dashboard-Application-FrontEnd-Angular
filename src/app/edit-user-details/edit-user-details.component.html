@@ -1,0 +1,44 @@
+<div class="container custom-container">
+  <h2>Edit User Details</h2>
+  <form *ngIf="editDetailsForm" [formGroup]="editDetailsForm" class="editDetailsForm">
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">PPC</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control-plaintext" formControlName="ppc" class="form-control">
+      </div>
+      <p *ngIf="!editDetailsForm.controls.ppc.pristine && editDetailsForm.controls.ppc.errors?.required" class="errorColor customError">PPC is required!</p>
+      <p *ngIf="!editDetailsForm.controls.ppc.pristine && editDetailsForm.controls.ppc.errors?.pattern" class="errorColor customError">Enter valid PPC</p>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" formControlName="name" placeholder="Name">
+      </div>
+      <p *ngIf="!editDetailsForm.controls.name.pristine && editDetailsForm.controls.name.errors?.required" class="errorColor customError">Name is required!</p>
+      <p *ngIf="!editDetailsForm.controls.name.pristine && editDetailsForm.controls.name.errors?.pattern" class="errorColor customError">Enter valid name!</p>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Role</label>
+      <div class="col-sm-7 select marginLeft15">
+        <select formControlName="role" class="customeDropdown">
+          <option value="" selected disabled hidden>Select Role</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+        </select>
+      </div>
+      <p *ngIf="!editDetailsForm.controls.role.pristine && editDetailsForm.controls.role.errors?.required" class="errorColor customError">Role is required!</p>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Functional Business Unit(s)</label>
+      <div class="col-sm-7">
+          <ng-multiselect-dropdown [placeholder]="'User functional business units'" [settings]="fbuMultiSettings" [data]="functionalBusinessUnits" formControlName="fbu"
+          >
+        </ng-multiselect-dropdown>
+      </div>
+    </div>
+    <div class="editUserbtn">
+      <button type="button" class="btn-normal btn-custom btn-search-custom" [disabled]="editDetailsForm.pristine || editDetailsForm.invalid"
+        (click)="editUser()">Submit</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,22 @@
+.custom-container {
+    margin-top: 50px;
+    border: 1px solid #c1c1c1;
+    padding: 20px;
+    max-width: 1000px;
+}
+.usereditBtn {
+    margin-top: 6%;
+    margin-left: 47%;
+}
+.editbtnGrp {
+    margin-left: 25%;
+    margin-top: 5%;
+}
+.editBtn {
+    margin-left: 13px;
+}
+.btn_delete {
+    padding: 10px 30px;
+    background-color: #e84f4f;
+    color: white;
+}

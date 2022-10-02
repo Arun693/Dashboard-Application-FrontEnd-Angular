@@ -1,0 +1,48 @@
+.custom-container {
+    margin-top: 50px;
+    border: 1px solid #c1c1c1;
+    padding: 20px;
+}
+.createIncidentForm {
+    margin-top: 50px;
+}
+.createIncidentForm > .form-group {
+    margin-top: 30px;
+}
+.custom-colum {
+    padding: 0px;
+}
+.incidentFrame {
+    margin-left: 16%;
+    color: #2f3942;
+    font-weight: bold;
+}
+.wrongDate {
+    margin-left: 16%;
+}
+.btn-container {
+    float: right;
+}
+.noPadding {
+    padding: 0px;
+}
+.closeMargin {
+    margin: 3px 0px 0px 10px;
+    cursor: pointer;
+}
+.btn-Margin {
+    margin-bottom: 10px;
+}
+.durationClass {
+    padding-top: 16px;
+}
+.columnPadding {
+    padding-top: 3px;
+}
+.txt-center-font {
+    font-size: 14px;
+    text-align: center !important;
+}
+.staff-padding {
+    padding-left: 0px;
+}

@@ -1,0 +1,117 @@
+.tags {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px inset;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(204, 204, 204);
+    border-image: initial;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    -webkit-appearance: textfield;
+    padding: 1px;
+    overflow: hidden;
+    word-wrap: break-word;
+    cursor: text;
+    background-color: #fff;
+    border: 1px solid #a9a9a9;
+    box-shadow: 1px 1px 1px 0 #d3d3d3 inset;
+    height: 100%;
+}
+.tag-item {
+    color: rgb(255, 255, 255);
+    background: rgb(66, 139, 202);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(53, 126, 189);
+    border-image: initial;
+    border-radius: 4px;
+    margin: 2px;
+    padding: 0 5px;
+    display: inline-block;
+    float: left;
+    font: 14px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    height: 26px;
+    line-height: 25px;
+    border: 1px solid #acacac;
+    border-radius: 3px;
+    background: -webkit-linear-gradient(top,#f0f9ff 0,#cbebff 47%,#a1dbff 100%);
+    background: linear-gradient(to bottom,#f0f9ff 0,#cbebff 47%,#a1dbff 100%)
+}
+.tag-list {
+    /* display: inline !important; */
+    padding-left: 0px;
+    display: inline-block !important;
+    margin-bottom: 0px;
+}
+.userInput {
+    border: 0;
+    outline: 0;
+    margin: 2px;
+    padding: 0 0 0 5px;
+    float: left;
+    height: 26px;
+    font: 14px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    width: 100%;
+    margin-right: 150px;
+}
+.tags .tag-item {
+    background: #428bca;
+    border: 1px solid #357ebd;
+    border-radius: 4px;
+    color: #fff;
+}
+.deleteHash{
+    margin: 0 0px 0px 5px;
+    padding: 0;
+    border: none;
+    background: 0 0;
+    cursor: pointer;
+    vertical-align: middle;
+    font: 700 16px Arial,sans-serif;
+    color: #585858;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    width: 94%;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    border-radius: 5px;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown a:hover {background-color: #ddd;}
+  
+  .show {display: block;}
+  .suggestionHash {
+      cursor: pointer;
+  }
+  .infoText {
+    color: #337ab7;
+    font-size: small;
+    font-family: serif;
+  }
+  .hashContainer .alert-danger {
+    margin-top: 30px;
+    padding: 0px;
+  }
+  .infoIcon {
+    position: absolute;
+    right: -15px;
+    top: 15px;
+    cursor: pointer;
+  }

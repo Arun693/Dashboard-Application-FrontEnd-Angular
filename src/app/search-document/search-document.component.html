@@ -1,0 +1,159 @@
+<div class="container custom-container">
+  <h2>Search Document</h2>
+  <form class="form-horizontal top-margin" *ngIf="searchDocumentForm" [formGroup]="searchDocumentForm">
+    <div>
+      <div class="form-group floatLeft50">
+        <label class="control-label col-sm-6" for="documentType">Functional Business Unit:</label>
+        <div class="col-sm-10 select marginLeft15">
+          <select formControlName="fbu" class="customeDropdown">
+            <option value="" selected disabled hidden>Select FBU</option>
+            <option *ngFor="let obj of functionalBusinessUnits" [value]="obj.id">{{obj.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group flatRight50">
+        <label class="control-label col-sm-10" for="documentType">Hashtags related to the document [Select from suggestion]:</label>
+        <div class="col-sm-10">
+          <hashtag [issearchOnly]="true" (hashList)="setUserTags($event)" [placeHolder]="'Type a few letters about the document to get suggetion'"></hashtag>
+        </div>
+      </div>
+    </div>
+    <div class="clearFloat"></div>
+    <div>
+      <div class="form-group floatLeft50">
+        <label class="control-label col-sm-6" for="applicationName">Application Name:</label>
+        <div class="col-sm-10" id="dropdownMulti">
+          <ng-multiselect-dropdown [placeholder]="'Select Application Name'" [data]="applicationNames" formControlName="applicationName"
+            [settings]="dropdownSettings">
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="form-group flatRight50">
+        <label class="control-label col-sm-6" for="documentType">Document Type:</label>
+        <div class="col-sm-10 select marginLeft15">
+          <select formControlName="documentType" class="customeDropdown ">
+            <option value="" selected disabled hidden>Select Document Type</option>
+            <option *ngFor="let obj of documentTypes" [value]="obj.id">{{obj.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="clearFloat"></div>
+    <div (click)="toggleFn()" class="advanceSearch">Advance Search </div>
+    <div><img [src]="toggleFlag ? 'assets/images/minus.png' : 'assets/images/plus.png'" class="imgWidth"></div>
+    <div class="clearFloat"></div>
+    <div [ngClass]="(toggleFlag== true)?'advSearch':'advSearchNostyle'">
+      <div *ngIf="toggleFlag">
+        <div>
+          <div class="form-group floatLeft50">
+            <label class="control-label col-sm-5" for="email">From Date:</label>
+            <div class="col-sm-10">
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd" name="dp" formControlName="documentFromDate" ngbDatepicker #d="ngbDatepicker"
+                    (select)="onDateSelection($event)">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                      <img src="assets/images/calender.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group flatRight50">
+            <label class="control-label col-sm-5" for="email">To Date:</label>
+            <div class="col-sm-10">
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd" name="dp" formControlName="documentToDate" ngbDatepicker #dt="ngbDatepicker"
+                    (select)="onDateSelection($event)">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="dt.toggle()" type="button">
+                      <img src="assets/images/calender.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearFloat"></div>
+        </div>
+        <div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="documentname">Document Name:</label>
+            <div class="col-sm-11">
+              <input type="text" class="form-control" formControlName="documentName" id="documentname" placeholder="Enter name of the document"
+                name="documentname">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   <!-- <div [ngClass]="(toggleFlag== true)?'clearFloat':''" class="clearFloat"> -->
+    <div *ngIf="showBtns" class="btn-container"> 
+      <back-cmp></back-cmp>
+      <button type="button" class="btn-normal btn-custom  btn-search-custom" [disabled]="searchDocumentForm.pristine" (click)="reset()">Reset</button>
+      <button type="button" class="btn-normal btn-custom btn-search-custom" (click)="search()" [disabled]="!searchDocumentForm.value.fbu">Search</button>
+    </div>
+  </form>
+  <div *ngIf="searchComplete">
+    <div class="col-md-5" *ngIf="data && data.data && !data.data.length" type="info">
+      <strong>No data available.</strong>
+    </div>
+    <table class="table table-striped table-condensed" *ngIf="data && data.data && data.data.length">
+      <thead>
+        <tr>
+          <th>Sl No</th>
+          <th class="txt-overflow">Document Name</th>
+          <th class="rowWidth">Application</th>
+          <th class="txt-overflow">File Name</th>
+          <th>Type of Document</th>
+          <th>Date</th>
+          <th>Download</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data.data;let i = index">
+          <td>{{i + data.offset + 1 }}</td>
+          <td class="txt-overflow txt-pointer" [ngbTooltip]="item.documentName">{{item.documentName}}</td>
+          <td class="rowWidth">{{item.applicationName}}</td>
+          <td class="txt-overflow txt-pointer" [ngbTooltip]="item.orginalName">{{item.orginalName}}</td>
+          <td>{{item.documentType}}</td>
+          <td class="dateRow">{{item.documentDate}}</td>
+          <td>
+            <img src="assets/images/download.png" class="downloadClass" (click)="downloadItem(item.fileName, item.orginalName, item.isBlob)">
+          </td>
+          <td>
+            <div *ngIf="isAdmin() && !item.isBlob">
+              <button (click)="deleteFile(item._id, item.orginalName)" class="btn btn-sm btn-info">
+                Delete
+              </button>
+            </div>
+            <div *ngIf="item.isBlob && item.createdBy == loggedUser?.ppc">
+              <button (click)="deleteDbFile(item._id, item.orginalName)" class="btn btn-sm btn-info">
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="data && data.pages > 1">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" *ngIf="data.current != 1">
+            <a class="page-link" tabindex="-1" (click)="previous()">Previous</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link">{{data.current}} of {{data.pages}}</a>
+          </li>
+          <li class="page-item" *ngIf="data.current != data.pages">
+            <a class="page-link" tabindex="1" (click)="next()">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

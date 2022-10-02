@@ -1,0 +1,103 @@
+<div class="container custom-container">
+  <h2>Add Document</h2>
+  <div *ngIf="showMessage">
+    <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.message }}</ngb-alert>
+  </div>
+  <form class="form-horizontal" *ngIf="uploadDocument" [formGroup]="uploadDocument">
+    <div>
+      <div class="form-group floatLeft50">
+        <label class="control-label col-sm-6">Name of the document:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" formControlName="documentName" id="documentname" placeholder="Enter name of the document"
+            name="documentname">
+        </div>
+        <p *ngIf="!uploadDocument.controls.documentName.pristine && uploadDocument.controls.documentName.errors" class="errorColor">Invalid Input or too long name!</p>
+      </div>
+      <div class="form-group flatRight50">
+        <label class="control-label col-sm-10">Hashtags for this document [<span class="error">Press ENTER key to add</span>]:</label>
+        <div class="col-sm-10">
+            <hashtag [issearchOnly]="false" (hashList)="setUserTags($event)" [placeHolder]="'Add new hashtag (Min 1 and Max 10 tags)'"></hashtag>
+        </div>
+      </div>
+    </div>
+    <div class="clearFloat"></div>
+    <div>
+      <div class="form-group floatLeft50">
+        <label class="control-label col-sm-6" for="documentType">Functional Business Unit:</label>
+        <div class="col-sm-10 select marginLeft15">
+          <select formControlName="fbu" class="customeDropdown">
+            <option value="" selected disabled hidden>Select FBU</option>
+            <option *ngFor="let obj of functionalBusinessUnits" [value]="obj.id">{{obj.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group flatRight50">
+        <label class="control-label col-sm-6" for="applicationName">Application Name:</label>
+        <div class="col-sm-10" id="dropdownMulti">
+          <ng-multiselect-dropdown [placeholder]="'Select Application Name'" [data]="applicationNames" formControlName="applicationName"
+            [settings]="dropdownSettings">
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="form-group floatLeft50">
+      <label class="control-label col-sm-5" for="email">Document Date:</label>
+      <div class="col-sm-10">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" formControlName="documentDate" ngbDatepicker #d="ngbDatepicker"
+              (select)="onDateSelection($event)">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                <img src="assets/images/calender.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group flatRight50">
+      <label class="control-label col-sm-5" for="email">Document Security:</label>
+      <div class="col-sm-10 select marginLeft15">
+        <select formControlName="security" class="customeDropdown" (ngModelChange)="changeSecurity($event)">
+          <option selected value="public">Public</option>
+          <option selected value="confidential">Confidential</option>
+        </select>
+      </div>
+    </div>
+    <div class="clearFloat"></div>
+    <div *ngIf="uploadDocument.value.security == 'confidential'">
+      <div class="form-group floatLeft50">
+        <label class="control-label col-sm-6" for="applicationName">Select Users:</label>
+        <div class="col-sm-10" id="dropdownUsers">
+          <ng-multiselect-dropdown [placeholder]="'Who all can view this document'" [data]="users" formControlName="privilegedUsers"
+            [settings]="userMultiSettings">
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="clearFloat"></div>
+    <div>
+      <div class="form-group floatLeft50">
+        <label class="control-label col-sm-6" for="documentType">Document Type:</label>
+        <div class="col-sm-10 select marginLeft15">
+          <select formControlName="documentType" class="customeDropdown">
+            <option value="" selected disabled hidden>Select Document Type</option>
+            <option *ngFor="let obj of documentTypes" [value]="obj.id">{{obj.name}}</option>
+          </select>
+        </div>
+        <p *ngIf="!uploadDocument.controls.documentType.pristine && uploadDocument.controls.documentType.errors?.required" class="errorColor errpadding">Application name is required!</p>
+      </div>
+      <div class="form-group customeFloatRight">
+        <label class="control-label col-sm-5" for="email">Upload Document:</label>
+        <div class="col-sm-10 item-margin">
+          <file-upload [(url)]="url" [queueLimit]="1" (onComplete)="submitData($event)" [formInvalid]="uploadDocument.invalid || hashTags.length == 0 || hashTags.length > 10"></file-upload>
+        </div>
+      </div>
+      <div class="backbtn">
+          <back-cmp></back-cmp>
+      </div>
+      <div class="clearFloat"></div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,14 @@
+<div class="container">
+  <h1 class="my-4">Welcome
+    <small>to Dashboard application!</small>
+  </h1>
+  <p>As a go-green initiative, this dashboard app will allow to store documents, incident reporting, etc. and serve
+    as a one touch point for all enterprise data.</p>
+  <div *ngIf="userRoutes" class="content-div">
+    <div class="row">
+      <div class="col-lg-4 col-sm-6 mb-4" *ngFor="let route of userRoutes;let i = index">
+        <card-cmp [cardData]="route"></card-cmp>
+      </div>
+    </div>
+  </div>
+</div>

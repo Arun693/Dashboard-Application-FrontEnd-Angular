@@ -1,0 +1,83 @@
+.custom-container {
+    margin-top: 50px;
+    border: 1px solid #c1c1c1;
+    padding: 20px;
+    padding-bottom: 60px;
+    max-width: 90%;
+}
+.txt-center-font {
+    font-size: 14px;
+}
+.clearPadding {
+    padding: 0px !important;
+}
+.incidentMargin {
+    margin-top: 30px !important;
+}
+.btn-container {
+    float: right;
+}
+.txt-overflow {
+    width: 300px;
+}
+.incidentTypeWidth {
+    width: 200px !important;
+}
+.dateRow {
+    width: 340px !important;
+}
+.table-condensed {
+    margin-top: 50px;
+}
+.borderClass {
+    border: 1px solid #95a5b5;
+    padding: 5px;
+    border-radius: 7px;
+    margin-bottom: 5px;
+}
+.durationFont {
+    font-weight: bold;
+}
+.noData {
+    margin-top: 35px;
+}
+.txtInputDiv {
+    padding: 0px;
+}
+.createIncidentForm .form-group {
+    margin-top: 30px;
+}
+.txt-crf {
+    width: 120px;
+}
+
+.table-incident-5 {
+    width:5%;
+}
+.table-incident-10 {
+    width:10%;
+}
+.table-incident-25 {
+    width:25%;
+}
+.table-incident-15 {
+    width:15%;
+}
+.resultContainer {
+    margin-top: 30px;
+}
+.excelContainer {
+    float: right;
+    cursor: pointer;
+}
+.excelTxt {
+    float: left;
+    font-size: smaller;
+    margin-top: 5px;
+    color: #3156e1;
+}
+.excelClass {
+    float: right;
+    width: 30px;
+    height: 30px;
+}
